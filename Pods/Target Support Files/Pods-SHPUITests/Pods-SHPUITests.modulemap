@@ -1,0 +1,6 @@
+framework module Pods_SHPUITests {
+  umbrella header "Pods-SHPUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}

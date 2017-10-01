@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AD_UNIT_ID_FOR_BANNER_TEST</key>
+	<string>ca-app-pub-3940256099942544/2934735716</string>
+	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
+	<string>ca-app-pub-3940256099942544/4411468910</string>
+	<key>CLIENT_ID</key>
+	<string>500006694850-evrr0nn1cm96qc0tpfami3ha9j1krk4r.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.500006694850-evrr0nn1cm96qc0tpfami3ha9j1krk4r</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBjcslPij8uQm3fNOw9O5n5vr2enTmIFCM</string>
+	<key>GCM_SENDER_ID</key>
+	<string>500006694850</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.SandoStudios.SHP</string>
+	<key>PROJECT_ID</key>
+	<string>shpapp-3b3ca</string>
+	<key>STORAGE_BUCKET</key>
+	<string>shpapp-3b3ca.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<true/>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false/>
+	<key>IS_APPINVITE_ENABLED</key>
+	<false/>
+	<key>IS_GCM_ENABLED</key>
+	<true/>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true/>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:500006694850:ios:1edbb865f5803161</string>
+	<key>DATABASE_URL</key>
+	<string>https://shpapp-3b3ca.firebaseio.com</string>
+</dict>
+</plist>
