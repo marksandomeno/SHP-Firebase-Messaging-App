@@ -22,7 +22,6 @@ class User: NSObject {
         self.name = dictionary["name"] as? String
         self.email = dictionary["email"] as? String
         self.profileImageUrl = dictionary["profileImageUrl"] as? String
-        self.AClass = dictionary["AClass"] as? String
     }
 }
 

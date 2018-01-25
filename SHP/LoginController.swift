@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import UserNotifications
 
 class LoginController: UIViewController {
     
@@ -27,7 +28,7 @@ class LoginController: UIViewController {
         view.backgroundColor = UIColor.white
         
         //dissmis keyboar on tap
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tap)
         
         //Populating UI
@@ -53,17 +54,19 @@ class LoginController: UIViewController {
         
     }
     
-    func dismissKeyboard() {
+    @objc func dismissKeyboard() {
         //Causes the view (or one of its embedded text fields) to resign the first responder status.
         view.endEditing(true)
     }
    
-
     
-    func handleLoginRegister() {
+    
+    @objc func handleLoginRegister() {
         
         if loginRegisterSegmentedControl.selectedSegmentIndex == 0 {
             handleLogin()
+         
+           
             
         } else {
             handleRegister()
@@ -78,10 +81,12 @@ class LoginController: UIViewController {
             return
         }
         
-        FIRAuth.auth()?.signIn(withEmail: email, password: password, completion: { (user, error) in
+        Auth.auth().signIn(withEmail: email, password: password, completion: { (user, error) in
             
             if error != nil {
                 print(error ?? "")
+                
+                
                 
             let animation = CABasicAnimation(keyPath: "position")
             animation.duration = 0.07
@@ -102,7 +107,13 @@ class LoginController: UIViewController {
             }
             
             //successfully logged in our user
-            
+            let center = UNUserNotificationCenter.current()
+            let options: UNAuthorizationOptions = [.alert, .badge, .sound]
+            center.requestAuthorization(options: options, completionHandler: { (granted, error) in
+                if granted {
+                    UIApplication.shared.registerForRemoteNotifications()
+                }
+            })
             self.messagesController?.fetchUserAndSetupNavBarTitle()
             
             self.dismiss(animated: true, completion: nil)
@@ -151,7 +162,7 @@ class LoginController: UIViewController {
         return button
     }()
     
-    func handleForgotPasswordSwitch() {
+    @objc func handleForgotPasswordSwitch() {
         
         
         let navController = UINavigationController(rootViewController: ForgotReset())
@@ -181,11 +192,23 @@ class LoginController: UIViewController {
         teacher.translatesAutoresizingMaskIntoConstraints = false
         teacher.setTitleColor(UIColor.white, for: UIControlState())
         teacher.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
-        teacher.layer.cornerRadius = 10
+        teacher.layer.cornerRadius = 18
         
-        // teacher.addTarget(self, action: #selector(), for: .touchUpInside)
+        teacher.addTarget(self, action: #selector(teacherTapped), for: .touchUpInside)
         return teacher
     }()
+    
+    
+    @objc func teacherTapped() {
+        
+        teacherButton.backgroundColor = UIColor(r: 80, g: 101, b: 161)
+        studentButton.backgroundColor = UIColor(white: 0.93, alpha: 1)
+        otherButton.backgroundColor = UIColor(white: 0.93, alpha: 1)
+        
+        profileImageView.image = UIImage(named: "teacherLogo")
+        
+        //profile image changed
+    }
     
     
     let studentButton: UIButton = {
@@ -196,11 +219,20 @@ class LoginController: UIViewController {
         student.translatesAutoresizingMaskIntoConstraints = false
         student.setTitleColor(UIColor.white, for: UIControlState())
         student.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
-        student.layer.cornerRadius = 10
+        student.layer.cornerRadius = 18
         
-       // teacher.addTarget(self, action: #selector(), for: .touchUpInside)
+        student.addTarget(self, action: #selector(studentTapped), for: .touchUpInside)
         return student
     }()
+    
+    @objc func studentTapped() {
+        
+        studentButton.backgroundColor = UIColor(r: 80, g: 101, b: 161)
+        teacherButton.backgroundColor = UIColor(white: 0.93, alpha: 1)
+        otherButton.backgroundColor = UIColor(white: 0.93, alpha: 1)
+        
+        profileImageView.image = UIImage(named: "Andrew")
+    }
     
     
     let otherButton: UIButton = {
@@ -212,11 +244,21 @@ class LoginController: UIViewController {
         other.translatesAutoresizingMaskIntoConstraints = false
         other.setTitleColor(UIColor.white, for: UIControlState())
         other.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
-        other.layer.cornerRadius = 10
+        other.layer.cornerRadius = 18
         
-        //other.addTarget(self, action: #selector(), for: .touchUpInside)
+        other.addTarget(self, action: #selector(otherTapped), for: .touchUpInside)
         return other
     }()
+    
+    @objc func otherTapped() {
+        
+        otherButton.backgroundColor = UIColor(r: 80, g: 101, b: 161)
+        studentButton.backgroundColor = UIColor(white: 0.93, alpha: 1)
+        teacherButton.backgroundColor = UIColor(white: 0.93, alpha: 1)
+        
+        profileImageView.image = UIImage(named: "otherLogo")
+        
+    }
 
     
     let nameTextField: UITextField = {
@@ -264,9 +306,8 @@ class LoginController: UIViewController {
         imageView.image = UIImage(named: "Andrew")
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFill
-        imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleSelectProfileImageView)))
         imageView.isUserInteractionEnabled = true
-        imageView.layer.cornerRadius = 100
+       
         
         return imageView
     }()
@@ -280,51 +321,44 @@ class LoginController: UIViewController {
         return sc
     }()
     
-   
-    
-    
-    
-    func handleLoginRegisterChange() {
-        
+
+    @objc func handleLoginRegisterChange() {
+
         if loginRegisterSegmentedControl.selectedSegmentIndex == 1 {
             
-            profileImageView.isUserInteractionEnabled = true
-            passwordTextField.placeholder = "Password (6+ characters)"
+            //profileImageView.isUserInteractionEnabled = true
+            passwordTextField.placeholder = "Custom Password (6+ characters)"
             
             profileImageView.image = UIImage(named: "Andrew")
             
             //show buttons
             teacherButton.isHidden = false
+            teacherButton.backgroundColor = UIColor(white: 0.95, alpha: 1)
             studentButton.isHidden = false
+            studentButton.backgroundColor = UIColor(white: 0.95, alpha: 1)
             otherButton.isHidden   = false
+            otherButton.backgroundColor = UIColor(white: 0.95, alpha: 1)
             StudentTeacherView.isHidden = false
             
             //change the constrinats to support the newly added buttons when on register VV
-            inputsContainerView.bottomAnchor.constraint(equalTo: StudentTeacherView.topAnchor, constant: -12).isActive = true
-            loginRegisterButton.topAnchor.constraint(equalTo: StudentTeacherView.bottomAnchor, constant: 12).isActive = true
             
-           
-            
+            setupChoiceViewConstriants()
+
         }else {
             
+            //change text and states
             profileImageView.isUserInteractionEnabled = false
             passwordTextField.placeholder = "Password"
-                        profileImageView.image = UIImage(named: "Andrew")
+            profileImageView.image = UIImage(named: "Andrew")
           
             //hide buttons
             teacherButton.isHidden = true
             studentButton.isHidden = true
             otherButton.isHidden   = true
             StudentTeacherView.isHidden = true
-            
-            
-        //pulls the button up where choices would be
 
-         loginRegisterButton.topAnchor.constraint(equalTo: inputsContainerView.bottomAnchor, constant: 12).isActive = true
-            
         }
         
-       
 
         let title = loginRegisterSegmentedControl.titleForSegment(at: loginRegisterSegmentedControl.selectedSegmentIndex)
         loginRegisterButton.setTitle(title, for: UIControlState())
@@ -375,7 +409,7 @@ class LoginController: UIViewController {
      func setupChoiceViewConstriants() {
             
             
-            StudentTeacherView.heightAnchor.constraint(equalToConstant: 30).isActive = true
+            StudentTeacherView.heightAnchor.constraint(equalToConstant: 40).isActive = true
             StudentTeacherView.topAnchor.constraint(equalTo: inputsContainerView.bottomAnchor, constant: 12).isActive = true
             StudentTeacherView.bottomAnchor.constraint(equalTo: loginRegisterButton.topAnchor, constant: -12).isActive = true
             StudentTeacherView.leftAnchor.constraint(equalTo: inputsContainerView.leftAnchor).isActive = true
@@ -395,10 +429,7 @@ class LoginController: UIViewController {
             otherButton.bottomAnchor.constraint(equalTo: StudentTeacherView.bottomAnchor).isActive = true
             otherButton.leftAnchor.constraint(equalTo: studentButton.rightAnchor, constant: 2).isActive = true
             otherButton.widthAnchor.constraint(equalTo: StudentTeacherView.widthAnchor, multiplier: 1/3).isActive = true
-    
-        
-    
-        
+ 
     }
    
     
@@ -437,7 +468,7 @@ class LoginController: UIViewController {
         nameSeparatorView.leftAnchor.constraint(equalTo: inputsContainerView.leftAnchor).isActive = true
         nameSeparatorView.topAnchor.constraint(equalTo: nameTextField.bottomAnchor).isActive = true
         nameSeparatorView.widthAnchor.constraint(equalTo: inputsContainerView.widthAnchor).isActive = true
-        nameSeparatorView.heightAnchor.constraint(equalToConstant: 1).isActive = true
+        nameSeparatorView.heightAnchor.constraint(equalToConstant: 2).isActive = true
         
         //need x, y, width, height constraints
         emailTextField.leftAnchor.constraint(equalTo: inputsContainerView.leftAnchor, constant: 12).isActive = true
@@ -453,7 +484,7 @@ class LoginController: UIViewController {
         emailSeparatorView.leftAnchor.constraint(equalTo: inputsContainerView.leftAnchor).isActive = true
         emailSeparatorView.topAnchor.constraint(equalTo: emailTextField.bottomAnchor).isActive = true
         emailSeparatorView.widthAnchor.constraint(equalTo: inputsContainerView.widthAnchor).isActive = true
-        emailSeparatorView.heightAnchor.constraint(equalToConstant: 1).isActive = true
+        emailSeparatorView.heightAnchor.constraint(equalToConstant: 2).isActive = true
         
         //need x, y, width, height constraints
         passwordTextField.leftAnchor.constraint(equalTo: inputsContainerView.leftAnchor, constant: 12).isActive = true

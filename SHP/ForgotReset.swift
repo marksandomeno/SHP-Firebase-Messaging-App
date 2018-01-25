@@ -14,27 +14,43 @@ class ForgotReset: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.black,
+                                                                   NSAttributedStringKey.font: UIFont(name: "Avenir-Roman", size: 17)!]
+        navigationItem.title = "Password Reset"
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(handleCancel))
         
         view.backgroundColor = UIColor.white
         
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        view.addGestureRecognizer(tap)
+        
         
         view.addSubview(emailtextField)
         view.addSubview(requestEmailButton)
+        view.addSubview(internaltextField)
         setupEmailTextField()
         setupRequestEmailButton()
+        setupinternalTextField()
     
     }
+    
+    let internaltextField: UITextField = {
+        let Itf = UITextField()
+        Itf.placeholder = "Email:"
+        Itf.clearsOnBeginEditing = true
+        Itf.textColor = UIColor(r: 80, g: 101, b: 161)
+        
+        return Itf
+        
+    }()
 
 
 let emailtextField: UITextField = {
     let tf = UITextField()
-    tf.placeholder = "      Email:"
-    tf.clearsOnBeginEditing = true
-    tf.textColor = UIColor(r: 80, g: 101, b: 161)
+   
     tf.backgroundColor = UIColor(white: 0.95, alpha: 1)
+    tf.isEnabled = false
     tf.layer.cornerRadius = 22
     
     tf.translatesAutoresizingMaskIntoConstraints = false
@@ -46,7 +62,7 @@ let emailtextField: UITextField = {
     let requestEmailButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = UIColor(r: 80, g: 101, b: 161)
-        button.setTitle("Request Email", for: UIControlState())
+        button.setTitle("Request Reset", for: UIControlState())
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitleColor(UIColor.white, for: UIControlState())
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
@@ -62,14 +78,30 @@ let emailtextField: UITextField = {
     }()
     
     
-    func handleRequestEmail() {
+    @objc func handleRequestEmail() {
         
-        FIRAuth.auth()?.sendPasswordReset(withEmail: emailtextField.text!) { error in
+        let alertController = UIAlertController(title: "Email has been sent to: " + internaltextField.text!, message:
+            "", preferredStyle: UIAlertControllerStyle.alert)
+        alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
         
+        self.present(alertController, animated: true, completion: nil)
+        
+        Auth.auth().sendPasswordReset(withEmail: internaltextField.text! ){ error in
+            
         }
         
-        print ("email has been sent")
-        emailtextField.text = ""
+        print ("email has been sent to " + (internaltextField.text!))
+        
+    }
+    
+    func setupinternalTextField() {
+        
+        internaltextField.topAnchor.constraint(equalTo: emailtextField.topAnchor).isActive = true
+        internaltextField.bottomAnchor.constraint(equalTo: emailtextField.bottomAnchor).isActive = true
+        internaltextField.leftAnchor.constraint(equalTo: emailtextField.leftAnchor, constant: 10).isActive = true
+        internaltextField.rightAnchor.constraint(equalTo: emailtextField.rightAnchor).isActive = true
+        
+        internaltextField.translatesAutoresizingMaskIntoConstraints = false
     }
     
     func setupRequestEmailButton() {
@@ -93,8 +125,12 @@ let emailtextField: UITextField = {
     
     }
     
-    func handleCancel() {
+    @objc func handleCancel() {
         dismiss(animated: true, completion: nil)
+    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
     }
 
 

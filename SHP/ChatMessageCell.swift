@@ -6,6 +6,8 @@
 //  Copyright © 2017 SandoStudios. All rights reserved.
 //
 
+//in chat constraints like bubble views and profile images
+
 import UIKit
 import AVFoundation
 
@@ -37,7 +39,7 @@ class ChatMessageCell: UICollectionViewCell {
     var playerLayer: AVPlayerLayer?
     var player: AVPlayer?
     
-    func handlePlay() {
+    @objc func handlePlay() {
         if let videoUrlString = message?.videoUrl, let url = URL(string: videoUrlString) {
             player = AVPlayer(url: url)
             
@@ -76,7 +78,7 @@ class ChatMessageCell: UICollectionViewCell {
         let view = UIView()
         view.backgroundColor = blueColor
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.layer.cornerRadius = 16
+        view.layer.cornerRadius = 17
         view.layer.masksToBounds = true
         return view
     }()
@@ -102,7 +104,7 @@ class ChatMessageCell: UICollectionViewCell {
         return imageView
     }()
     
-    func handleZoomTap(_ tapGesture: UITapGestureRecognizer) {
+    @objc  func handleZoomTap(_ tapGesture: UITapGestureRecognizer) {
         if message?.videoUrl != nil {
             return
         }

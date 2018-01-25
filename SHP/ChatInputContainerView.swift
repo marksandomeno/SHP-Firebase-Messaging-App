@@ -5,6 +5,7 @@
 //  Created by Mark Sandomeno on 7/6/17.
 //  Copyright © 2017 SandoStudios. All rights reserved.
 //
+//bottom input container at bottom
 
 import UIKit
 
@@ -54,7 +55,7 @@ class ChatInputContainerView: UIView, UITextFieldDelegate {
         
        
         
-        //what is handleSend?
+       
         
         addSubview(sendButton)
         //x,y,w,h
@@ -87,7 +88,9 @@ class ChatInputContainerView: UIView, UITextFieldDelegate {
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
         chatLogController?.handleSend()
+        
         return true
     }
     
@@ -96,4 +99,4 @@ class ChatInputContainerView: UIView, UITextFieldDelegate {
     }
     
 }
-
+ 

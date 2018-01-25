@@ -7,76 +7,80 @@
 //
 
 import UIKit
+import FirebaseAuth
+import UserNotifications
 
 
 extension MessagesController: UIToolbarDelegate {
     
 
-   func setupToolBar() {
+    func setupToolBar() {
     
     var myToolbar = UIToolbar()
+      
+
+   
     
-    myToolbar = UIToolbar(frame: CGRect(x: 0, y: view.bounds.size.height - 35, width: view.bounds.size.width, height: 46.5))
-    myToolbar.layer.position = CGPoint(x: self.view.bounds.width/2, y: self.view.bounds.height-5)
-    myToolbar.backgroundColor = UIColor.clear
+    myToolbar = UIToolbar(frame: CGRect(x: 0, y: 0 , width: view.bounds.size.width + 40, height: 40))
+    myToolbar.layer.position = CGPoint(x: self.view.bounds.width/2, y: self.view.bounds.height-25)
+      
+      
+        myToolbar.setBackgroundImage(UIImage(),
+                                        forToolbarPosition: .any,
+                                        barMetrics: .default)
+        myToolbar.setShadowImage(UIImage(), forToolbarPosition: .any)
    
 
-        let myUIBarButtonSHPN: UIBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "sportsicon") ,style:.plain, target: self, action: #selector(whenClickOnBarButton(_:)))
+        
+    
+        let myUIBarButtonWeb: UIBarButtonItem = UIBarButtonItem(image : #imageLiteral(resourceName: "webicon"), style: .plain, target: self, action: #selector(whenClickOnBarButton(_:)))
+        
+        
+        let myUIBarButtonCloud: UIBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "cloud"), style: .plain, target: self, action :#selector(whenClickOnBarButton(_:)))
+        
+        myUIBarButtonWeb.tag = 1
+        myUIBarButtonCloud.tag = 2
+//        myUIBarButtonWeb.tintColor = UIColor(r: 80, g: 101, b: 161)
+       myUIBarButtonCloud.tintColor = UIColor(r: 230, g: 74, b: 25)
+    
 
-        myUIBarButtonSHPN.tag = 1
-        myUIBarButtonSHPN.tintColor = UIColor.init(r: 100, g: 100, b: 100)
-    
-        
-        let myUIBarButtonSchoolNews: UIBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "newsicon"), style:.plain , target: self, action: #selector(whenClickOnBarButton(_:)))
-    
-        myUIBarButtonSchoolNews.tag = 2
-        myUIBarButtonSchoolNews.tintColor = UIColor.init(r: 100, g: 100, b: 100)
-    
-        let myUIBarButtonGrades: UIBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "schoolicon"), style:.plain, target: self, action: #selector(whenClickOnBarButton(_:)))
-        myUIBarButtonGrades.tag = 3
-        myUIBarButtonGrades.tintColor = UIColor.init(r: 100, g: 100, b: 100)
-    
-        let myUIBarButtonWeb: UIBarButtonItem = UIBarButtonItem(image : #imageLiteral(resourceName: "webicon"), style:.plain, target: self, action: #selector(whenClickOnBarButton(_:)))
-        myUIBarButtonWeb.tag = 4
-        myUIBarButtonWeb.tintColor = UIColor.init(r: 100, g: 100, b: 100)
-    
-    
-    
-    
-        
-        
-        
-        
+   
         let fixedSpace: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.fixedSpace, target: nil, action: nil)
-        fixedSpace.width = 58.0
         
-        myToolbar.items = [myUIBarButtonSchoolNews,fixedSpace, myUIBarButtonSHPN,fixedSpace, myUIBarButtonWeb,fixedSpace,  myUIBarButtonGrades]
+        fixedSpace.width = 600
         
+        myToolbar.items = [myUIBarButtonWeb,fixedSpace, myUIBarButtonCloud]
         
         self.navigationController?.view.addSubview(myToolbar)
 
     
     }
-
     
-
    
     
+  
+   
 
-    
-    func whenClickOnBarButton(_ sender: UIBarButtonItem) {
+    @objc func whenClickOnBarButton(_ sender: UIBarButtonItem) {
         
         switch sender.tag {
             
         case 1:
-            print ("switched to SHPN")
-             let myUIBarButtonSHPN: UIBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "sportsicon") ,style:.plain, target: self, action: #selector(whenClickOnBarButton(_:)))
+            
+        
+            if let url = URL(string: "https://shp.myschoolapp.com/app#login") {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            }
+            
         case 2:
-            break
-        case 3:
-            break
-        case 4:
-            UIApplication.shared.openURL(NSURL(string: "https://shp.myschoolapp.com/app#login")! as URL)
+            
+        if let url = URL(string: "https://login.microsoftonline.com") {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            }
+            
+           
+
+        
         default:
             print("ERROR!!")
      

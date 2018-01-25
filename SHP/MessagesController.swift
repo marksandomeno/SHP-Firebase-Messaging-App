@@ -18,71 +18,67 @@ class MessagesController: UITableViewController {
     var messagesDictionary = [String: Message]()
     let cellId = "cellId"
     var timer: Timer?
+   
+   
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-       
         
+ 
         let image = UIImage(named: "new_message_icon")
         
-        navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.black,
-                                                                   NSFontAttributeName: UIFont(name: "Avenir-Roman", size: 17)!]
-        
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.black,
+                                                                   NSAttributedStringKey.font: UIFont(name: "Avenir-Roman", size: 15)!]
+    
 
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(handleNewMessage))
         
-        navigationController?.navigationBar.backgroundColor = UIColor.white
+        navigationController?.navigationBar.backgroundColor = UIColor.clear
         
         tableView.register(UserCell.self, forCellReuseIdentifier: cellId)
         
+        
         checkIfUserIsLoggedIn()
+
+        setupToolBar()
         
-        //setupToolBar()
-        
+
         tableView.allowsMultipleSelectionDuringEditing = true
         
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "webicon"), style: .plain, target: self, action: #selector(web))
+        
         
      
-        
-        
-        
+       
+
     }
-    
     
 
-    func web() {
-         UIApplication.shared.openURL(NSURL(string: "https://shp.myschoolapp.com/app#login")! as URL)
-    }
-    
-  
-    
-    
-    
-    
+
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         
+  
         return true
+        
+       
         
     }
     
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath){
         
-        guard let uid = FIRAuth.auth()?.currentUser?.uid else{
+        guard let uid = Auth.auth().currentUser?.uid else{
             
             return
         }
         
-        
+        //know who and what we are talking about...
         let message = self.messages[indexPath.row]
-   
+        
         if let chatPartnerId = message.chatPartnerId() {
-            
-        
-        
-            FIRDatabase.database().reference().child("user-messages").child(uid).child(chatPartnerId).removeValue(completionBlock: { (error, ref) in
+ 
+            fetchUserAndSetupNavBarTitle()
+            Database.database().reference().child("user-messages").child(uid).child(chatPartnerId).removeValue(completionBlock: { (error, ref) in
                 
                 if error != nil {
                     
@@ -100,15 +96,15 @@ class MessagesController: UITableViewController {
   
     
     func observeUserMessages() {
-        guard let uid = FIRAuth.auth()?.currentUser?.uid else {
+        guard let uid = Auth.auth().currentUser?.uid else {
             return
         }
         
-        let ref = FIRDatabase.database().reference().child("user-messages").child(uid)
+        let ref = Database.database().reference().child("user-messages").child(uid)
         ref.observe(.childAdded, with: { (snapshot) in
             
             let userId = snapshot.key
-            FIRDatabase.database().reference().child("user-messages").child(uid).child(userId).observe(.childAdded, with: { (snapshot) in
+            Database.database().reference().child("user-messages").child(uid).child(userId).observe(.childAdded, with: { (snapshot) in
                 
                 let messageId = snapshot.key
                 self.fetchMessageWithMessageId(messageId)
@@ -132,20 +128,22 @@ class MessagesController: UITableViewController {
     
     
     fileprivate func fetchMessageWithMessageId(_ messageId: String) {
-        let messagesReference = FIRDatabase.database().reference().child("messages").child(messageId)
         
+        
+        let messagesReference = Database.database().reference().child("messages").child(messageId)
+
         messagesReference.observeSingleEvent(of: .value, with: { (snapshot) in
-            
+
             if let dictionary = snapshot.value as? [String: AnyObject] {
                 let message = Message(dictionary: dictionary)
-                
+
                 if let chatPartnerId = message.chatPartnerId() {
                     self.messagesDictionary[chatPartnerId] = message
                 }
-                
+
                 self.attemptReloadOfTable()
             }
-            
+
         }, withCancel: nil)
     }
     
@@ -158,7 +156,8 @@ class MessagesController: UITableViewController {
     
     
     
-    func handleReloadTable() {
+    @objc func handleReloadTable() {
+        
         self.messages = Array(self.messagesDictionary.values)
         self.messages.sort(by: { (message1, message2) -> Bool in
             
@@ -190,7 +189,9 @@ class MessagesController: UITableViewController {
     
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 72
+        
+        return 75
+        
     }
     
     
@@ -198,11 +199,12 @@ class MessagesController: UITableViewController {
         let message = messages[indexPath.row]
         
         
+        
         guard let chatPartnerId = message.chatPartnerId() else {
             return
         }
         
-        let ref = FIRDatabase.database().reference().child("users").child(chatPartnerId)
+        let ref = Database.database().reference().child("users").child(chatPartnerId)
         ref.observeSingleEvent(of: .value, with: { (snapshot) in
             guard let dictionary = snapshot.value as? [String: AnyObject] else {
                 return
@@ -210,12 +212,13 @@ class MessagesController: UITableViewController {
             
             let user = User(dictionary: dictionary)
             user.id = chatPartnerId
+            
             self.showChatControllerForUser(user)
             
         }, withCancel: nil)
     }
     
-    func handleNewMessage() {
+    @objc func handleNewMessage() {
         let newMessageController = NewMessageController()
         newMessageController.messagesController = self
         let navController = UINavigationController(rootViewController: newMessageController)
@@ -223,7 +226,7 @@ class MessagesController: UITableViewController {
     }
     
     func checkIfUserIsLoggedIn() {
-        if FIRAuth.auth()?.currentUser?.uid == nil {
+        if Auth.auth().currentUser?.uid == nil {
             perform(#selector(handleLogout), with: nil, afterDelay: 0)
         } else {
             fetchUserAndSetupNavBarTitle()
@@ -231,19 +234,20 @@ class MessagesController: UITableViewController {
     }
     
     func fetchUserAndSetupNavBarTitle() {
-        guard let uid = FIRAuth.auth()?.currentUser?.uid else {
+        guard let uid = Auth.auth().currentUser?.uid else {
             //for some reason uid = nil
             return
         }
         
-        FIRDatabase.database().reference().child("users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
+        Database.database().reference().child("users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
             
             if let dictionary = snapshot.value as? [String: AnyObject] {
-                //                self.navigationItem.title = dictionary["name"] as? String
                 
-                let user = User(dictionary: dictionary)
-                user.setValuesForKeys(dictionary)
-                self.setupNavBarWithUser(user)
+            let user = User(dictionary: dictionary)
+
+           // user.setValuesForKeys(dictionary)
+            self.setupNavBarWithUser(user)
+                
             }
             
         }, withCancel: nil)
@@ -258,23 +262,26 @@ class MessagesController: UITableViewController {
 
         let titleView = UIView()
         titleView.frame = CGRect(x: 0, y: 0, width: 100, height: 40)
+        titleView.isUserInteractionEnabled = true
         
+
        
-        
+  
+       
         let containerView = UIView()
+        
         containerView.translatesAutoresizingMaskIntoConstraints = false
-        titleView.addSubview(containerView)
+        containerView.backgroundColor = UIColor.blue
+       titleView.addSubview(containerView)
         
        
         
         let profileImageView = UIImageView()
         profileImageView.translatesAutoresizingMaskIntoConstraints = false
         profileImageView.contentMode = .scaleAspectFill
-        profileImageView.layer.cornerRadius = 20
         profileImageView.clipsToBounds = true
-        if let profileImageUrl = user.profileImageUrl {
-            profileImageView.loadImageUsingCacheWithUrlString(profileImageUrl)
-        }
+        profileImageView.image = UIImage(named: "id")
+
         
         self.navigationItem.titleView = titleView
         
@@ -303,15 +310,22 @@ class MessagesController: UITableViewController {
         containerView.centerXAnchor.constraint(equalTo: titleView.centerXAnchor).isActive = true
         containerView.centerYAnchor.constraint(equalTo: titleView.centerYAnchor).isActive = true
         
-      
-        
-    }
     
-    func handleProfile() {
+    
+    
+}
+    
+ 
+    
 
+
+    
+    @objc func handleProfile() {
        
         let navController = UINavigationController(rootViewController: Profile())
-        present(navController, animated: true, completion: nil)
+        present(navController, animated: true) {
+       
+        }
         
         
 
@@ -321,13 +335,15 @@ class MessagesController: UITableViewController {
     func showChatControllerForUser(_ user: User) {
         let chatLogController = ChatLogController(collectionViewLayout: UICollectionViewFlowLayout())
         chatLogController.user = user
+       
         navigationController?.pushViewController(chatLogController, animated: true)
+       
     }
     
-    func handleLogout() {
+    @objc func handleLogout() {
         
         do {
-            try FIRAuth.auth()?.signOut()
+            try Auth.auth().signOut()
         } catch let logoutError {
             print(logoutError)
         }
@@ -357,6 +373,8 @@ fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
     default:
         return rhs < lhs
     }
+    
+  
 }
 
 

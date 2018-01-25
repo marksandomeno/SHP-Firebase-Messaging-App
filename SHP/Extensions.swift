@@ -11,6 +11,8 @@ let imageCache = NSCache<AnyObject, AnyObject>()
 
 extension UIImageView {
     
+    //basically takes url string of image and turns it into a picture that you can see
+    
     func loadImageUsingCacheWithUrlString(_ urlString: String) {
         
         self.image = nil

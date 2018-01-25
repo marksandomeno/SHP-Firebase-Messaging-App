@@ -26,9 +26,10 @@
 		CE9D0CAE1EB941B700D2AFA4 /* SHPTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9D0CAD1EB941B700D2AFA4 /* SHPTests.swift */; };
 		CE9D0CB91EB941B700D2AFA4 /* SHPUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9D0CB81EB941B700D2AFA4 /* SHPUITests.swift */; };
 		CE9D0CC71EB9453800D2AFA4 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9D0CC61EB9453800D2AFA4 /* LoginController.swift */; };
-		CE9D0CC91EB94B4400D2AFA4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE9D0CC81EB94B4400D2AFA4 /* GoogleService-Info.plist */; };
 		CE9D0CD01EBE3F7000D2AFA4 /* NewMessageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9D0CCF1EBE3F7000D2AFA4 /* NewMessageController.swift */; };
 		CE9D0CD51EBE401B00D2AFA4 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9D0CD41EBE401B00D2AFA4 /* User.swift */; };
+		CEAAD4761F9A5E290074C1D5 /* DeactivateAccountPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAAD4751F9A5E290074C1D5 /* DeactivateAccountPage.swift */; };
+		CEE808FA1FC1E80C00AC57F0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CEE808F91FC1E80C00AC57F0 /* GoogleService-Info.plist */; };
 		D735223520BEABDD7DB98B42 /* Pods_SHPUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F670A1BDE0F2C6F4604F71D /* Pods_SHPUITests.framework */; };
 		E52D9D3FA530EC173254A0D6 /* Pods_SHP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14DC2B4B9C31EC743FC2FF8A /* Pods_SHP.framework */; };
 /* End PBXBuildFile section */
@@ -81,10 +82,11 @@
 		CE9D0CB81EB941B700D2AFA4 /* SHPUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SHPUITests.swift; sourceTree = "<group>"; };
 		CE9D0CBA1EB941B700D2AFA4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE9D0CC61EB9453800D2AFA4 /* LoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
-		CE9D0CC81EB94B4400D2AFA4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CE9D0CCA1EBE127500D2AFA4 /* SHP.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SHP.entitlements; sourceTree = "<group>"; };
 		CE9D0CCF1EBE3F7000D2AFA4 /* NewMessageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewMessageController.swift; sourceTree = "<group>"; };
 		CE9D0CD41EBE401B00D2AFA4 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		CEAAD4751F9A5E290074C1D5 /* DeactivateAccountPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeactivateAccountPage.swift; sourceTree = "<group>"; };
+		CEE808F91FC1E80C00AC57F0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E881159A3A2CB9996E5119E1 /* Pods-SHPTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SHPTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SHPTests/Pods-SHPTests.release.xcconfig"; sourceTree = "<group>"; };
 		EE5E7C180802A4CAA0724ED8 /* Pods-SHP.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SHP.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SHP/Pods-SHP.debug.xcconfig"; sourceTree = "<group>"; };
 		F6E4181FCF49F44013C4CB7E /* Pods-SHPTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SHPTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SHPTests/Pods-SHPTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -128,17 +130,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		CE07744A1F0EEDD800444B4B /* CHAT */ = {
-			isa = PBXGroup;
-			children = (
-				CE418E0F1EF2DB8E005B4B54 /* Controllers */,
-				CE9D0CD31EBE3FE600D2AFA4 /* Model */,
-				CE1244F11EF71B3E00D06C8E /* mainChatView */,
-				CE418E0C1EF2DB55005B4B54 /* Helpers */,
-			);
-			name = CHAT;
-			sourceTree = "<group>";
-		};
 		CE1244F11EF71B3E00D06C8E /* mainChatView */ = {
 			isa = PBXGroup;
 			children = (
@@ -162,11 +153,13 @@
 			isa = PBXGroup;
 			children = (
 				CE9D0CC61EB9453800D2AFA4 /* LoginController.swift */,
+				CEAAD4751F9A5E290074C1D5 /* DeactivateAccountPage.swift */,
 				CE9D0C9A1EB941B500D2AFA4 /* MessagesController.swift */,
 				CE418E0A1EF1A2D1005B4B54 /* LoginController+handlers.swift */,
 				CE9D0CCF1EBE3F7000D2AFA4 /* NewMessageController.swift */,
 				CE418E121EF432FA005B4B54 /* ChatLogController.swift */,
 				CE8C9AA21F57ACBA0059C9CC /* ForgotReset.swift */,
+				CE6AD6821F4C7427003C56C9 /* Profile.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -196,10 +189,12 @@
 		CE9D0C971EB941B500D2AFA4 /* SHP */ = {
 			isa = PBXGroup;
 			children = (
-				CE07744A1F0EEDD800444B4B /* CHAT */,
+				CE9D0CD31EBE3FE600D2AFA4 /* Model */,
+				CE1244F11EF71B3E00D06C8E /* mainChatView */,
+				CE418E0C1EF2DB55005B4B54 /* Helpers */,
+				CE418E0F1EF2DB8E005B4B54 /* Controllers */,
 				CE9D0C981EB941B500D2AFA4 /* AppDelegate.swift */,
-				CE6AD6821F4C7427003C56C9 /* Profile.swift */,
-				CE9D0CC81EB94B4400D2AFA4 /* GoogleService-Info.plist */,
+				CEE808F91FC1E80C00AC57F0 /* GoogleService-Info.plist */,
 				CE9D0C9F1EB941B600D2AFA4 /* Assets.xcassets */,
 				CE9D0CA41EB941B600D2AFA4 /* Info.plist */,
 				CE9D0C9C1EB941B600D2AFA4 /* Main.storyboard */,
@@ -302,6 +297,7 @@
 				CE9D0CB11EB941B700D2AFA4 /* Frameworks */,
 				CE9D0CB21EB941B700D2AFA4 /* Resources */,
 				650D321A896AD4B41B389366 /* [CP] Copy Pods Resources */,
+				7FE0A3ADBA9D2DAE09AF2A92 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -326,6 +322,7 @@
 					CE9D0C941EB941B500D2AFA4 = {
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = V59UP3Q6JQ;
+						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
@@ -345,12 +342,14 @@
 					CE9D0CA81EB941B700D2AFA4 = {
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = V59UP3Q6JQ;
+						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 						TestTargetID = CE9D0C941EB941B500D2AFA4;
 					};
 					CE9D0CB31EB941B700D2AFA4 = {
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = V59UP3Q6JQ;
+						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 						TestTargetID = CE9D0C941EB941B500D2AFA4;
 					};
@@ -381,7 +380,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE9D0CC91EB94B4400D2AFA4 /* GoogleService-Info.plist in Resources */,
+				CEE808FA1FC1E80C00AC57F0 /* GoogleService-Info.plist in Resources */,
 				CE9D0CA31EB941B600D2AFA4 /* LaunchScreen.storyboard in Resources */,
 				CE9D0CA01EB941B600D2AFA4 /* Assets.xcassets in Resources */,
 				CE9D0C9E1EB941B600D2AFA4 /* Main.storyboard in Resources */,
@@ -411,13 +410,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SHP-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		5A35B970CEEA14D6E5144EA3 /* [CP] Embed Pods Frameworks */ = {
@@ -486,31 +488,19 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SHPTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		D22504F82B9761F6DA8C7836 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		EE8B2AABCC6F5A13054AE453 /* [CP] Embed Pods Frameworks */ = {
+		7FE0A3ADBA9D2DAE09AF2A92 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -519,6 +509,50 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SHPUITests/Pods-SHPUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D22504F82B9761F6DA8C7836 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SHPUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EE8B2AABCC6F5A13054AE453 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-SHP/Pods-SHP-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -542,6 +576,7 @@
 				CE0774491F0EE81300444B4B /* ChatInputContainerView.swift in Sources */,
 				CE9D0CD51EBE401B00D2AFA4 /* User.swift in Sources */,
 				CE1244F01EF60C6800D06C8E /* Message.swift in Sources */,
+				CEAAD4761F9A5E290074C1D5 /* DeactivateAccountPage.swift in Sources */,
 				CE9D0C991EB941B500D2AFA4 /* AppDelegate.swift in Sources */,
 				CE1244F51EF871C900D06C8E /* ChatMessageCell.swift in Sources */,
 				CE1244F31EF71B7800D06C8E /* UserCell.swift in Sources */,
@@ -710,12 +745,17 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = SHP/SHP.entitlements;
-				DEVELOPMENT_TEAM = V59UP3Q6JQ;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = SHP/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.SandoStudios.SHP;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -725,12 +765,17 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = SHP/SHP.entitlements;
-				DEVELOPMENT_TEAM = V59UP3Q6JQ;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = SHP/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.SandoStudios.SHP;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};
@@ -745,7 +790,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.SandoStudios.SHPTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SHP.app/SHP";
 			};
 			name = Debug;
@@ -761,7 +807,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.SandoStudios.SHPTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SHP.app/SHP";
 			};
 			name = Release;
@@ -776,7 +823,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.SandoStudios.SHPUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
 				TEST_TARGET_NAME = SHP;
 			};
 			name = Debug;
@@ -791,7 +839,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.SandoStudios.SHPUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
 				TEST_TARGET_NAME = SHP;
 			};
 			name = Release;

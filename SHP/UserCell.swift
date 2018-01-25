@@ -6,6 +6,7 @@
 //  Copyright © 2017 SandoStudios. All rights reserved.
 //
 
+//cell presented in messages controller
 import UIKit
 import Firebase
 
@@ -16,7 +17,9 @@ class UserCell: UITableViewCell {
         didSet {
             setupNameAndProfileImage()
             
+            
             detailTextLabel?.text = message?.text
+            detailTextLabel?.textColor = UIColor.init(r: 100, g: 100, b: 100)
             
             
             
@@ -37,7 +40,7 @@ class UserCell: UITableViewCell {
         
         
         if let id = message?.chatPartnerId() {
-            let ref = FIRDatabase.database().reference().child("users").child(id)
+            let ref = Database.database().reference().child("users").child(id)
             ref.observeSingleEvent(of: .value, with: { (snapshot) in
         
                 
@@ -57,7 +60,7 @@ class UserCell: UITableViewCell {
         super.layoutSubviews()
         
         textLabel?.frame = CGRect(x: 64, y: textLabel!.frame.origin.y - 2, width: textLabel!.frame.width, height: textLabel!.frame.height)
-        textLabel?.textColor = UIColor.init(r: 100, g: 100, b: 100)
+        textLabel?.textColor = UIColor.black
         detailTextLabel?.frame = CGRect(x: 64, y: detailTextLabel!.frame.origin.y + 2, width: 300 , height: detailTextLabel!.frame.height)
         
         }

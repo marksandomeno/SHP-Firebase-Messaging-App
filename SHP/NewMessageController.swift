@@ -32,10 +32,10 @@ class NewMessageController: UITableViewController, UISearchBarDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+       
         
-        
-        navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.black ,
-                                                                   NSFontAttributeName: UIFont(name: "Avenir-Roman", size: 18)!]
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.black ,
+                                                                   NSAttributedStringKey.font: UIFont(name: "Avenir-Roman", size: 18)!]
         navigationItem.title = "Directory"
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel" , style: .plain, target: self, action: #selector(handleCancel))
@@ -48,18 +48,15 @@ class NewMessageController: UITableViewController, UISearchBarDelegate {
         
         filterContentForSearchText(searchText: searchController.searchBar.text!)
         
-        
-        
-        
-        
+
         
     }
     
     func filterContentForSearchText(searchText: String, scope: String = "Current") {
         filteredUsers = users.filter { user in
             return (user.name?.lowercased().contains(searchText.lowercased()))!
+         
         }
-        
         
         
         tableView.reloadData()
@@ -85,6 +82,7 @@ class NewMessageController: UITableViewController, UISearchBarDelegate {
         searchController.searchBar.delegate = self
         searchController.searchResultsUpdater = self
         searchController.searchBar.sizeToFit()
+        searchController.searchBar.backgroundColor = .white
         
         
         
@@ -120,7 +118,7 @@ class NewMessageController: UITableViewController, UISearchBarDelegate {
     
     func fetchUser() {
         
-        FIRDatabase.database().reference().child("users").observe(.childAdded, with: { (snapshot) in
+        Database.database().reference().child("users").observe(.childAdded, with: { (snapshot) in
             
             if let dictionary = snapshot.value as? [String: AnyObject] {
                 let user = User(dictionary: dictionary)
@@ -140,9 +138,11 @@ class NewMessageController: UITableViewController, UISearchBarDelegate {
     
     
     
-    func handleCancel() {
+    @objc func handleCancel() {
         dismiss(animated: true, completion: nil)
     }
+    
+    
     
     
     

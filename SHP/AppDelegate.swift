@@ -8,29 +8,28 @@
 
 import UIKit
 import Firebase
-
-
+import UserNotifications
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+
+class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
     
     var window: UIWindow?
     
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-        FIRApp.configure()
+        FirebaseApp.configure()
         
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
         
         window?.rootViewController = UINavigationController(rootViewController: MessagesController())
         
-        let notificationTypes: UIUserNotificationType = [UIUserNotificationType.alert, UIUserNotificationType.badge, UIUserNotificationType.sound ]
-        let notificationSettings = UIUserNotificationSettings(types: notificationTypes, categories: nil)
-        application.registerForRemoteNotifications()
-        application.registerUserNotificationSettings(notificationSettings)
-        
+
+        Messaging.messaging().delegate = self
+      
+    
         return true
     }
     
@@ -62,5 +61,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
     
+    func messaging(_ messaging: Messaging, didRefreshRegistrationToken fcmToken: String) {
+        guard let userId = Auth.auth().currentUser?.uid else {
+            return
+        }
+        Database.database().reference().child("users").child(userId).child("deviceToken").setValue(fcmToken)
+    }
+    
+    func messaging(_ messaging: Messaging, didReceive remoteMessage: MessagingRemoteMessage) {
+        
+    }
+    
     
 }
+
+/*extension AppDelegate: UNUserNotificationCenterDelegate {
+    
+    public func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        
+        completionHandler(.alert)
+    }
+    
+    public func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Swift.Void) {
+        completionHandler()
+    }
+}*/
