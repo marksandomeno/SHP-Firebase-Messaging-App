@@ -3,15 +3,12 @@
 //  SHP
 //
 //  Created by Mark Sandomeno on 8/22/17.
-//  Copyright © 2017 SandoStudios. All rights reserved.
+//  Copyright © 2017 Sando. All rights reserved.
 //
-
 
 import UIKit
 import Firebase
 import FirebaseAuth
-
-
 
 class Profile : UIViewController, UINavigationControllerDelegate{
     
@@ -48,105 +45,102 @@ class Profile : UIViewController, UINavigationControllerDelegate{
         view.addSubview(emailLabel)
         view.addSubview(profileImageView)
         
-        view.addSubview(editButton)
-        view.addSubview(saveButton)
-       
-        
-        
+//        view.addSubview(editButton)
+//        view.addSubview(saveButton)
+//
+
        
         setupRequestEmailButton()
         setupDeactivateButtonConstarints()
         setupnamelabel()
         setupEmailLabel()
         setupProfileImage()
-        setupEditButton()
-        setupSaveButton()
+//        setupEditButton()
+//        setupSaveButton()
 
     }
     
     //three edit buttons
     
-    let editButton: UIButton = {
-        let but = UIButton()
-        but.isMultipleTouchEnabled = true
-        but.setImage(#imageLiteral(resourceName: "editicon"), for: .normal)
-        but.addTarget(self, action: #selector(switchSaveMode), for: UIControlEvents.touchUpInside)
-        
-        return but
-    }()
+//    let editButton: UIButton = {
+//        let but = UIButton()
+//        but.isMultipleTouchEnabled = true
+//        but.setImage(#imageLiteral(resourceName: "editicon"), for: .normal)
+//        but.addTarget(self, action: #selector(switchSaveMode), for: UIControlEvents.touchUpInside)
+//
+//        return but
+//    }()
+//
+//
+//    @objc func switchSaveMode() {
+//
+//
+//        saveButton.backgroundColor = UIColor.green
+//        saveButton.setTitle("Save", for: UIControlState())
+//
+//        emailLabel.isEnabled = true
+//        nameLabel.isEnabled = true
+//        editButton.isHidden = true
+//
+//    }
     
-
-  
+//    let saveButton: UIButton = {
+//        let but = UIButton()
+//
+//        but.layer.cornerRadius = 22
+//        but.addTarget(self, action: #selector(handleSaveNewInfoToDatabase), for: UIControlEvents.touchUpInside)
+//        but.showsTouchWhenHighlighted = true
+//        return but
+//    }()
     
-    @objc func switchSaveMode() {
-      
-       
-        saveButton.backgroundColor = UIColor.green
-        saveButton.setTitle("Save", for: UIControlState())
-     
-        emailLabel.isEnabled = true
-        nameLabel.isEnabled = true
-        editButton.isHidden = true
-        
-    }
     
-    let saveButton: UIButton = {
-        let but = UIButton()
-        
-        but.layer.cornerRadius = 22
-        but.addTarget(self, action: #selector(handleSaveNewInfoToDatabase), for: UIControlEvents.touchUpInside)
-        but.showsTouchWhenHighlighted = true
-        return but
-    }()
+//    func setupSaveButton() {
+//
+//        saveButton.topAnchor.constraint(equalTo: profileImageView.bottomAnchor, constant: 20).isActive = true
+//        saveButton.bottomAnchor.constraint(equalTo: emailLabel.topAnchor, constant: -15).isActive = true
+//        saveButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -60).isActive = true
+//        saveButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 60).isActive = true
+//        saveButton.translatesAutoresizingMaskIntoConstraints = false
+//
+//
+//    }
     
-    func setupSaveButton() {
-        
-        saveButton.topAnchor.constraint(equalTo: profileImageView.bottomAnchor, constant: 20).isActive = true
-        saveButton.bottomAnchor.constraint(equalTo: emailLabel.topAnchor, constant: -15).isActive = true
-        saveButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -60).isActive = true
-        saveButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 60).isActive = true
-        saveButton.translatesAutoresizingMaskIntoConstraints = false
-        
-        
-    }
-    
-    func handleNewUserData() {
-   
-        
-        
-    }
-   
-    
-    @objc func  handleSaveNewInfoToDatabase() {
-        
-  //needs to take email label text and name label text and selected new profile pic and update into database, and reautheticate?
-
-       handleNewUserData()
-        
-        
-        saveButton.backgroundColor = UIColor(r: 253, g: 253, b: 253)
-        editButton.isHidden = false
-        nameLabel.isEnabled = false
-        emailLabel.isEnabled = false
-        
-     
-    }
+//    func handleNewUserData() {
+//
+//
+//    }
+//
+//
+//    @objc func  handleSaveNewInfoToDatabase() {
+//
+//  //needs to take email label text and name label text and selected new profile pic and update into database, and reautheticate?
+//
+//       handleNewUserData()
+//
+//
+//        saveButton.backgroundColor = UIColor(r: 253, g: 253, b: 253)
+//        editButton.isHidden = false
+//        nameLabel.isEnabled = false
+//        emailLabel.isEnabled = false
+//
+//
+//    }
  
     
     
-    func setupEditButton() {
-        
-     
-        //editButton.bottomAnchor.constraint(equalTo: profileImageView.topAnchor).isActive = true
-        editButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
-        editButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20).isActive = true
-        editButton.leftAnchor.constraint(equalTo: profileImageView.rightAnchor, constant: 50).isActive = true
-        editButton.bottomAnchor.constraint(equalTo: view.topAnchor, constant: 130).isActive = true
-        
-        editButton.translatesAutoresizingMaskIntoConstraints = false
-        
-    
-    }
+//    func setupEditButton() {
+//
+//
+//        //editButton.bottomAnchor.constraint(equalTo: profileImageView.topAnchor).isActive = true
+//        editButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
+//        editButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20).isActive = true
+//        editButton.leftAnchor.constraint(equalTo: profileImageView.rightAnchor, constant: 50).isActive = true
+//        editButton.bottomAnchor.constraint(equalTo: view.topAnchor, constant: 130).isActive = true
+//
+//        editButton.translatesAutoresizingMaskIntoConstraints = false
+//
+//
+//    }
 
     
     
@@ -265,7 +259,7 @@ class Profile : UIViewController, UINavigationControllerDelegate{
         button.setTitleColor(UIColor.white, for: UIControlState())
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
         button.showsTouchWhenHighlighted = true
-        button.layer.cornerRadius = 20
+  
         
         button.addTarget(self, action: #selector(handleRequestPasswordEmail), for: .touchUpInside)
         
@@ -280,9 +274,11 @@ class Profile : UIViewController, UINavigationControllerDelegate{
         
         requestPasswordEmailButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         requestPasswordEmailButton.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 10).isActive = true
-        requestPasswordEmailButton.bottomAnchor.constraint(equalTo: deactivateButton.topAnchor, constant: -20).isActive = true
-        requestPasswordEmailButton.widthAnchor.constraint(equalTo: nameLabel.widthAnchor).isActive = true
-        requestPasswordEmailButton.heightAnchor.constraint(equalToConstant: 47).isActive = true
+        requestPasswordEmailButton.bottomAnchor.constraint(equalTo: deactivateButton.topAnchor, constant: -10).isActive = true
+        //requestPasswordEmailButton.widthAnchor.constraint(equalTo: nameLabel.widthAnchor).isActive = true
+        requestPasswordEmailButton.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        requestPasswordEmailButton.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        requestPasswordEmailButton.heightAnchor.constraint(equalToConstant: 60).isActive = true
         
     }
     
@@ -314,15 +310,16 @@ class Profile : UIViewController, UINavigationControllerDelegate{
     
     
     @objc func handleLogout() {
-        
-        do {
-            try Auth.auth().signOut()
-        } catch let logoutError {
-            print(logoutError)
+        if let currentUser = Auth.auth().currentUser {
+            do {
+                try Auth.auth().signOut()
+                Database.database().reference().child("users").child(currentUser.uid).child("deviceToken").removeValue()
+            } catch let logoutError {
+                print(logoutError)
+            }
+            let loginController = LoginController()
+            present(loginController, animated: true, completion: nil)
         }
-        
-        let loginController = LoginController()
-        present(loginController, animated: true, completion: nil)
         
     }
     

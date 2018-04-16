@@ -39,14 +39,8 @@
                                     <constraint firstAttribute="width" constant="134" id="JjU-rH-Wi6"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SHP Connect" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g0h-gT-INO">
-                                <rect key="frame" x="99" y="347" width="192" height="58"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="32"/>
-                                <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="V.1.0 - Updates Weekly" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BJe-Y3-59y">
-                                <rect key="frame" x="7" y="627" width="176" height="32"/>
+                                <rect key="frame" x="115" y="394" width="176" height="32"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="32" id="uhf-BJ-kSY"/>
                                 </constraints>
@@ -54,22 +48,28 @@
                                 <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SHP Connect" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g0h-gT-INO">
+                                <rect key="frame" x="91" y="347" width="192" height="58"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="32"/>
+                                <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="g0h-gT-INO" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" constant="83" id="1hd-od-hkp"/>
+                            <constraint firstItem="g0h-gT-INO" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" constant="75" id="1hd-od-hkp"/>
                             <constraint firstItem="TKn-xj-Cv0" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" constant="12" id="5kR-aJ-mge"/>
-                            <constraint firstItem="BJe-Y3-59y" firstAttribute="centerX" secondItem="g0h-gT-INO" secondAttribute="centerX" constant="-100" id="ERR-Ou-3FR"/>
+                            <constraint firstItem="BJe-Y3-59y" firstAttribute="centerX" secondItem="g0h-gT-INO" secondAttribute="centerX" constant="16" id="ERR-Ou-3FR"/>
                             <constraint firstAttribute="trailingMargin" secondItem="TKn-xj-Cv0" secondAttribute="trailing" constant="65" id="FE3-Cp-TjX"/>
                             <constraint firstItem="Twg-FY-4Pf" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="200" id="HVg-w1-41H"/>
-                            <constraint firstItem="BJe-Y3-59y" firstAttribute="bottom" secondItem="xb3-aO-Qok" secondAttribute="top" constant="-8" id="QXe-Xb-rk4"/>
-                            <constraint firstItem="BJe-Y3-59y" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" constant="-9" id="Tl8-Iw-mtO"/>
+                            <constraint firstItem="BJe-Y3-59y" firstAttribute="bottom" secondItem="xb3-aO-Qok" secondAttribute="top" constant="-241" id="QXe-Xb-rk4"/>
+                            <constraint firstItem="BJe-Y3-59y" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" constant="99" id="Tl8-Iw-mtO"/>
                             <constraint firstItem="Twg-FY-4Pf" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="UNl-Mf-iWp"/>
                             <constraint firstItem="TKn-xj-Cv0" firstAttribute="centerY" secondItem="g0h-gT-INO" secondAttribute="centerY" constant="1" id="ZaR-Ki-8EJ"/>
                             <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="TKn-xj-Cv0" secondAttribute="bottom" constant="275" id="bf6-bK-YV5"/>
                             <constraint firstItem="g0h-gT-INO" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="327" id="ffM-ec-wUB"/>
                             <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="g0h-gT-INO" secondAttribute="bottom" constant="262" id="pJW-4k-iWX"/>
-                            <constraint firstItem="Twg-FY-4Pf" firstAttribute="centerX" secondItem="g0h-gT-INO" secondAttribute="centerX" constant="-8" id="tg4-50-9HN"/>
+                            <constraint firstItem="Twg-FY-4Pf" firstAttribute="centerX" secondItem="g0h-gT-INO" secondAttribute="centerX" id="tg4-50-9HN"/>
                             <constraint firstItem="TKn-xj-Cv0" firstAttribute="top" secondItem="Twg-FY-4Pf" secondAttribute="bottom" constant="8" symbolic="YES" id="vdL-tQ-8xd"/>
                         </constraints>
                     </view>

@@ -3,7 +3,7 @@
 //  SHP
 //
 //  Created by Mark Sandomeno on 6/14/17.
-//  Copyright © 2017 SandoStudios. All rights reserved.
+//  Copyright © 2017 Sando. All rights reserved.
 //
 
 import UIKit
@@ -14,7 +14,7 @@ extension LoginController: UIImagePickerControllerDelegate, UINavigationControll
     
     func handleRegister() {
         
-        
+    
         guard let email = emailTextField.text, let password = passwordTextField.text, let name = nameTextField.text else {
             print("Form is not valid")
             return
@@ -26,35 +26,43 @@ extension LoginController: UIImagePickerControllerDelegate, UINavigationControll
                 print(123456)
                 return
             }
-            
-            let center = UNUserNotificationCenter.current()
-            let options: UNAuthorizationOptions = [.alert, .badge, .sound]
-            center.requestAuthorization(options: options, completionHandler: { (granted, error) in
-                if granted {
-                    UIApplication.shared.registerForRemoteNotifications()
-                }
-            })
-            self.messagesController?.fetchUserAndSetupNavBarTitle()
-            
-            self.dismiss(animated: true, completion: nil)
-
-    
-
+         
             
             guard let uid = user?.uid else {
                 return
             }
             
+            if let registrationToken = Messaging.messaging().fcmToken {
+                Database.database().reference().child("users").child(uid).child("deviceToken").setValue(registrationToken)
+            }
+            else
+            {
+                let center = UNUserNotificationCenter.current()
+                let options: UNAuthorizationOptions = [.alert, .badge, .sound]
+                
+                center.requestAuthorization(options: options, completionHandler: { (granted, error) in
+                    if granted {
+                        
+                        DispatchQueue.main.async(execute: {
+                            UIApplication.shared.registerForRemoteNotifications()
+                            
+                        })
+                    }
+                })
+            }
+            
+            self.messagesController?.fetchUserAndSetupNavBarTitle()
+            
+            self.dismiss(animated: true, completion: nil)
+        
             
             //successfully authenticated user
             let imageName = UUID().uuidString
             let storageRef = Storage.storage().reference().child("profile_images").child("\(imageName).jpg")
             
-           
-           
             
             if let profileImage = self.profileImageView.image, let uploadData = UIImageJPEGRepresentation(profileImage, 0.1) {
-               
+                
                 
                 storageRef.putData(uploadData, metadata: nil, completion: { (metadata, error) in
                     
@@ -86,57 +94,58 @@ extension LoginController: UIImagePickerControllerDelegate, UINavigationControll
                 print(err ?? "")
                 return
             }
-    
-         
-           let user = User(dictionary: values)
-           self.messagesController?.setupNavBarWithUser(user)
+            
+            
+            let user = User(dictionary: values)
+            self.messagesController?.setupNavBarWithUser(user)
             
             self.dismiss(animated: true, completion: nil)
         })
     }
     
     
-//    func handleSelectProfileImageView() {
-//
-//
-//        let picker = UIImagePickerController()
-//
-//        picker.delegate = self
-//        picker.allowsEditing = true
-//
-//
-//        present(picker, animated: true, completion: nil)
-//    }
-//
-//
-//    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-//
-//        var selectedImageFromPicker: UIImage?
-//
-//
-//        if let editedImage = info["UIImagePickerControllerEditedImage"] as? UIImage {
-//            selectedImageFromPicker = editedImage
-//
-//        } else if let originalImage = info["UIImagePickerControllerOriginalImage"] as? UIImage {
-//
-//            selectedImageFromPicker = originalImage
-//        }
-//
-//        if let selectedImage = selectedImageFromPicker {
-//            profileImageView.image = selectedImage
-//        }
-//
-//        dismiss(animated: true, completion: nil)
-//
-//    }
-//
-//
-//
-//    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-//
-//        dismiss(animated: true, completion: nil)
-//    }
-//
-//}
-
+    //    func handleSelectProfileImageView() {
+    //
+    //
+    //        let picker = UIImagePickerController()
+    //
+    //        picker.delegate = self
+    //        picker.allowsEditing = true
+    //
+    //
+    //        present(picker, animated: true, completion: nil)
+    //    }
+    //
+    //
+    //    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+    //
+    //        var selectedImageFromPicker: UIImage?
+    //
+    //
+    //        if let editedImage = info["UIImagePickerControllerEditedImage"] as? UIImage {
+    //            selectedImageFromPicker = editedImage
+    //
+    //        } else if let originalImage = info["UIImagePickerControllerOriginalImage"] as? UIImage {
+    //
+    //            selectedImageFromPicker = originalImage
+    //        }
+    //
+    //        if let selectedImage = selectedImageFromPicker {
+    //            profileImageView.image = selectedImage
+    //        }
+    //
+    //        dismiss(animated: true, completion: nil)
+    //
+    //    }
+    //
+    //
+    //
+    //    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+    //
+    //        dismiss(animated: true, completion: nil)
+    //    }
+    //
+    //}
 }
+
+

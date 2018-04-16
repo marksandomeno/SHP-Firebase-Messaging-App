@@ -14,8 +14,8 @@
 		CE1244F51EF871C900D06C8E /* ChatMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1244F41EF871C800D06C8E /* ChatMessageCell.swift */; };
 		CE418E0B1EF1A2D1005B4B54 /* LoginController+handlers.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE418E0A1EF1A2D1005B4B54 /* LoginController+handlers.swift */; };
 		CE418E0E1EF2DB79005B4B54 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE418E0D1EF2DB79005B4B54 /* Extensions.swift */; };
-		CE418E111EF33913005B4B54 /* Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE418E101EF33912005B4B54 /* Toolbar.swift */; };
 		CE418E131EF432FA005B4B54 /* ChatLogController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE418E121EF432FA005B4B54 /* ChatLogController.swift */; };
+		CE43365A203F3CD900EAE299 /* daySchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE433659203F3CD900EAE299 /* daySchedule.swift */; };
 		CE6AD6831F4C7428003C56C9 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6AD6821F4C7427003C56C9 /* Profile.swift */; };
 		CE8C9AA31F57ACBA0059C9CC /* ForgotReset.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8C9AA21F57ACBA0059C9CC /* ForgotReset.swift */; };
 		CE9D0C991EB941B500D2AFA4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9D0C981EB941B500D2AFA4 /* AppDelegate.swift */; };
@@ -30,6 +30,7 @@
 		CE9D0CD51EBE401B00D2AFA4 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9D0CD41EBE401B00D2AFA4 /* User.swift */; };
 		CEAAD4761F9A5E290074C1D5 /* DeactivateAccountPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAAD4751F9A5E290074C1D5 /* DeactivateAccountPage.swift */; };
 		CEE808FA1FC1E80C00AC57F0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CEE808F91FC1E80C00AC57F0 /* GoogleService-Info.plist */; };
+		CEFB4DEA2030A6AC00B15E5D /* Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFB4DE92030A6AC00B15E5D /* Toolbar.swift */; };
 		D735223520BEABDD7DB98B42 /* Pods_SHPUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F670A1BDE0F2C6F4604F71D /* Pods_SHPUITests.framework */; };
 		E52D9D3FA530EC173254A0D6 /* Pods_SHP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14DC2B4B9C31EC743FC2FF8A /* Pods_SHP.framework */; };
 /* End PBXBuildFile section */
@@ -64,8 +65,8 @@
 		CE1244F41EF871C800D06C8E /* ChatMessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatMessageCell.swift; sourceTree = "<group>"; };
 		CE418E0A1EF1A2D1005B4B54 /* LoginController+handlers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LoginController+handlers.swift"; sourceTree = "<group>"; };
 		CE418E0D1EF2DB79005B4B54 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
-		CE418E101EF33912005B4B54 /* Toolbar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Toolbar.swift; sourceTree = "<group>"; };
 		CE418E121EF432FA005B4B54 /* ChatLogController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatLogController.swift; sourceTree = "<group>"; };
+		CE433659203F3CD900EAE299 /* daySchedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = daySchedule.swift; sourceTree = "<group>"; };
 		CE6AD6821F4C7427003C56C9 /* Profile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		CE8C9AA21F57ACBA0059C9CC /* ForgotReset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotReset.swift; sourceTree = "<group>"; };
 		CE9D0C951EB941B500D2AFA4 /* SHP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SHP.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -87,6 +88,7 @@
 		CE9D0CD41EBE401B00D2AFA4 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		CEAAD4751F9A5E290074C1D5 /* DeactivateAccountPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeactivateAccountPage.swift; sourceTree = "<group>"; };
 		CEE808F91FC1E80C00AC57F0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		CEFB4DE92030A6AC00B15E5D /* Toolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toolbar.swift; sourceTree = "<group>"; };
 		E881159A3A2CB9996E5119E1 /* Pods-SHPTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SHPTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SHPTests/Pods-SHPTests.release.xcconfig"; sourceTree = "<group>"; };
 		EE5E7C180802A4CAA0724ED8 /* Pods-SHP.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SHP.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SHP/Pods-SHP.debug.xcconfig"; sourceTree = "<group>"; };
 		F6E4181FCF49F44013C4CB7E /* Pods-SHPTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SHPTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SHPTests/Pods-SHPTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -144,7 +146,7 @@
 			isa = PBXGroup;
 			children = (
 				CE418E0D1EF2DB79005B4B54 /* Extensions.swift */,
-				CE418E101EF33912005B4B54 /* Toolbar.swift */,
+				CEFB4DE92030A6AC00B15E5D /* Toolbar.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -153,6 +155,7 @@
 			isa = PBXGroup;
 			children = (
 				CE9D0CC61EB9453800D2AFA4 /* LoginController.swift */,
+				CE433659203F3CD900EAE299 /* daySchedule.swift */,
 				CEAAD4751F9A5E290074C1D5 /* DeactivateAccountPage.swift */,
 				CE9D0C9A1EB941B500D2AFA4 /* MessagesController.swift */,
 				CE418E0A1EF1A2D1005B4B54 /* LoginController+handlers.swift */,
@@ -571,13 +574,14 @@
 				CE9D0C9B1EB941B500D2AFA4 /* MessagesController.swift in Sources */,
 				CE9D0CD01EBE3F7000D2AFA4 /* NewMessageController.swift in Sources */,
 				CE418E0B1EF1A2D1005B4B54 /* LoginController+handlers.swift in Sources */,
-				CE418E111EF33913005B4B54 /* Toolbar.swift in Sources */,
 				CE9D0CC71EB9453800D2AFA4 /* LoginController.swift in Sources */,
 				CE0774491F0EE81300444B4B /* ChatInputContainerView.swift in Sources */,
+				CE43365A203F3CD900EAE299 /* daySchedule.swift in Sources */,
 				CE9D0CD51EBE401B00D2AFA4 /* User.swift in Sources */,
 				CE1244F01EF60C6800D06C8E /* Message.swift in Sources */,
 				CEAAD4761F9A5E290074C1D5 /* DeactivateAccountPage.swift in Sources */,
 				CE9D0C991EB941B500D2AFA4 /* AppDelegate.swift in Sources */,
+				CEFB4DEA2030A6AC00B15E5D /* Toolbar.swift in Sources */,
 				CE1244F51EF871C900D06C8E /* ChatMessageCell.swift in Sources */,
 				CE1244F31EF71B7800D06C8E /* UserCell.swift in Sources */,
 				CE6AD6831F4C7428003C56C9 /* Profile.swift in Sources */,

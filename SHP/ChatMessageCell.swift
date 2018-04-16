@@ -3,10 +3,10 @@
 //  SHP
 //
 //  Created by Mark Sandomeno on 6/19/17.
-//  Copyright © 2017 SandoStudios. All rights reserved.
+//  Copyright © 2017 Sando. All rights reserved.
 //
 
-//in chat constraints like bubble views and profile images
+
 
 import UIKit
 import AVFoundation

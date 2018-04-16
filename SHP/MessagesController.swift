@@ -3,11 +3,12 @@
 //  SHP
 //
 //  Created by Mark Sandomeno on 5/2/17.
-//  Copyright © 2017 SandoStudios. All rights reserved.
+//  Copyright © 2017 Sando. All rights reserved.
 //
 
 import UIKit
 import Firebase
+import UserNotifications
 
 
 
@@ -18,7 +19,9 @@ class MessagesController: UITableViewController {
     var messagesDictionary = [String: Message]()
     let cellId = "cellId"
     var timer: Timer?
+    var myToolbar = UIToolbar()
    
+    
    
     
     override func viewDidLoad() {
@@ -30,29 +33,74 @@ class MessagesController: UITableViewController {
         
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.black,
                                                                    NSAttributedStringKey.font: UIFont(name: "Avenir-Roman", size: 15)!]
-    
+    navigationController?.navigationBar.backgroundColor = UIColor.init(r: 255, g: 255, b: 255)
 
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(handleNewMessage))
+        
+         //  navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "schedule"), style: .plain, target: self, action: #selector(handleShowSchedule))
         
         navigationController?.navigationBar.backgroundColor = UIColor.clear
         
         tableView.register(UserCell.self, forCellReuseIdentifier: cellId)
-        
-        
-        checkIfUserIsLoggedIn()
 
-        setupToolBar()
+        checkIfUserIsLoggedIn()
         
 
         tableView.allowsMultipleSelectionDuringEditing = true
         
         
+        //toolbar shit
         
+       
+        myToolbar = UIToolbar(frame: CGRect(x: -10, y: -10 , width: view.bounds.size.width + 40, height: 40))
+        myToolbar.layer.position = CGPoint(x: self.view.bounds.width/2, y: self.view.bounds.height-25)
+        
+        
+        myToolbar.setBackgroundImage(UIImage(),
+                                     forToolbarPosition: .any,
+                                     barMetrics: .default)
+        myToolbar.setShadowImage(UIImage(), forToolbarPosition: .any)
+        
+        let myUIBarButtonWeb: UIBarButtonItem = UIBarButtonItem(image : #imageLiteral(resourceName: "webicon"), style: .plain, target: self, action: #selector(whenClickOnBarButton(_:)))
+        
+        
+        let myUIBarButtonCloud: UIBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "cloud"), style: .plain, target: self, action :#selector(whenClickOnBarButton(_:)))
+        
+        myUIBarButtonWeb.tag = 1
+        myUIBarButtonCloud.tag = 2
+        
+        myUIBarButtonCloud.tintColor = UIColor(r: 230, g: 74, b: 25)
+
+        let fixedSpace: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.fixedSpace, target: nil, action: nil)
+        
+        fixedSpace.width = 600
+        
+        myToolbar.items = [myUIBarButtonWeb,fixedSpace, myUIBarButtonCloud]
+        
+       
+        
+
+        self.navigationController?.view.addSubview(myToolbar)
+        
+      
      
        
 
     }
     
+    override func motionEnded(_ motion: UIEventSubtype, with event: UIEvent?) {
+        if motion == .motionShake {
+            
+            let scheduleController = daySchedule()
+            let navController = UINavigationController(rootViewController: scheduleController)
+            present(navController, animated: true, completion: nil)
+           
+        }
+    }
+    
+  
+    
+  
 
 
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -92,6 +140,8 @@ class MessagesController: UITableViewController {
             })
         }
     }
+    
+   
     
   
     
@@ -139,6 +189,8 @@ class MessagesController: UITableViewController {
 
                 if let chatPartnerId = message.chatPartnerId() {
                     self.messagesDictionary[chatPartnerId] = message
+                   
+                    
                 }
 
                 self.attemptReloadOfTable()
@@ -160,6 +212,7 @@ class MessagesController: UITableViewController {
         
         self.messages = Array(self.messagesDictionary.values)
         self.messages.sort(by: { (message1, message2) -> Bool in
+          
             
             return message1.timestamp?.int32Value > message2.timestamp?.int32Value
         })
@@ -181,6 +234,7 @@ class MessagesController: UITableViewController {
         
         let message = messages[indexPath.row]
         cell.message = message
+       
         
         
         
@@ -194,9 +248,14 @@ class MessagesController: UITableViewController {
         
     }
     
+  
+ 
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let message = messages[indexPath.row]
+     
+       
+ 
         
         
         
@@ -260,8 +319,8 @@ class MessagesController: UITableViewController {
         
         observeUserMessages()
 
-        let titleView = UIView()
-        titleView.frame = CGRect(x: 0, y: 0, width: 100, height: 40)
+        let titleView = UIButton()
+        titleView.frame = CGRect(x: 0, y: 0, width: 200, height: 50)
         titleView.isUserInteractionEnabled = true
         
 
@@ -280,7 +339,7 @@ class MessagesController: UITableViewController {
         profileImageView.translatesAutoresizingMaskIntoConstraints = false
         profileImageView.contentMode = .scaleAspectFill
         profileImageView.clipsToBounds = true
-        profileImageView.image = UIImage(named: "id")
+        profileImageView.image = UIImage(named: "profile")
 
         
         self.navigationItem.titleView = titleView
@@ -293,8 +352,8 @@ class MessagesController: UITableViewController {
         //need x,y,width,height anchors
         profileImageView.leftAnchor.constraint(equalTo: containerView.leftAnchor).isActive = true
         profileImageView.centerYAnchor.constraint(equalTo: containerView.centerYAnchor).isActive = true
-        profileImageView.widthAnchor.constraint(equalToConstant: 40).isActive = true
-        profileImageView.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        profileImageView.widthAnchor.constraint(equalToConstant: 30).isActive = true
+        profileImageView.heightAnchor.constraint(equalToConstant: 30).isActive = true
         
         let nameLabel = UILabel()
         
@@ -309,17 +368,10 @@ class MessagesController: UITableViewController {
         
         containerView.centerXAnchor.constraint(equalTo: titleView.centerXAnchor).isActive = true
         containerView.centerYAnchor.constraint(equalTo: titleView.centerYAnchor).isActive = true
-        
-    
-    
+
     
 }
-    
- 
-    
 
-
-    
     @objc func handleProfile() {
        
         let navController = UINavigationController(rootViewController: Profile())
@@ -332,11 +384,40 @@ class MessagesController: UITableViewController {
     }
     
     
+    @objc func whenClickOnBarButton(_ sender: UIBarButtonItem) {
+        
+        switch sender.tag {
+        case 1:
+            
+                        if let url = URL(string: "https://shp.myschoolapp.com/app#login") {
+                            //handleLogout()
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                           
+            }
+            
+        case 2:
+            
+            if let url = URL(string: "https://login.microsoftonline.com") {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            }
+
+        default:
+            print("ERROR!!")
+            
+        }
+        
+    }
+    
+   
+    
+    
     func showChatControllerForUser(_ user: User) {
         let chatLogController = ChatLogController(collectionViewLayout: UICollectionViewFlowLayout())
         chatLogController.user = user
        
         navigationController?.pushViewController(chatLogController, animated: true)
+        
+    
        
     }
     
@@ -354,6 +435,8 @@ class MessagesController: UITableViewController {
     }
     
 }
+
+
 
 fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
     switch (lhs, rhs) {

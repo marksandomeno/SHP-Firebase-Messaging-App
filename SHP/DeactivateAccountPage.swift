@@ -3,7 +3,7 @@
 //  SHP
 //
 //  Created by Mark Sandomeno on 10/20/17.
-//  Copyright © 2017 SandoStudios. All rights reserved.
+//  Copyright © 2017 Sando. All rights reserved.
 //
 
 import UIKit

@@ -3,7 +3,7 @@
 //  SHP
 //
 //  Created by Mark Sandomeno on 6/16/17.
-//  Copyright © 2017 SandoStudios. All rights reserved.
+//  Copyright © 2017 Sando. All rights reserved.
 //
 
 
@@ -13,6 +13,8 @@ import MobileCoreServices
 import AVFoundation
 
 class ChatLogController: UICollectionViewController, UITextFieldDelegate, UICollectionViewDelegateFlowLayout, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+   
     
     var user: User? {
         didSet {
@@ -24,7 +26,7 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
     
     var messages = [Message]()
     
-    
+   
     
     func observeMessages() {
         guard let uid = Auth.auth().currentUser?.uid, let toId = user?.id else {
@@ -69,13 +71,17 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
         
         collectionView?.keyboardDismissMode = .interactive
         
+        
         setupKeyboardObservers()
+        
+        
+       
 
         
     }
     
     lazy var inputContainerView: ChatInputContainerView = {
-        let chatInputContainerView = ChatInputContainerView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 70))
+        let chatInputContainerView = ChatInputContainerView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 88))
         chatInputContainerView.chatLogController = self
         return chatInputContainerView
     }()
@@ -91,7 +97,7 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
         present(imagePickerController, animated: true, completion: nil)
     }
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+   func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         
         if let videoUrl = info[UIImagePickerControllerMediaURL] as? URL {
             //we selected a video
@@ -218,11 +224,17 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
         }
     }
     
+
+    
+  
     override func viewDidDisappear(_ animated: Bool) {
-       
+        
+        
        super.viewDidDisappear(animated)
        NotificationCenter.default.removeObserver(self)
-    
+
+        
+
        
     }
     
@@ -376,8 +388,8 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
     
     //good way to add child values 
     fileprivate func sendMessageWithProperties(_ properties: [String: AnyObject]) {
-        //sends message properties
         
+        //sends message properties
         let ref = Database.database().reference().child("messages")
         let childRef = ref.childByAutoId()
         let toId = user!.id!

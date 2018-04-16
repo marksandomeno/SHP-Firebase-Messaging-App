@@ -3,7 +3,7 @@
 //  SHP
 //
 //  Created by Mark Sandomeno on 6/17/17.
-//  Copyright © 2017 SandoStudios. All rights reserved.
+//  Copyright © 2017 Sando. All rights reserved.
 //
 
 import UIKit
@@ -20,6 +20,7 @@ class Message: NSObject {
     var imageHeight: NSNumber?
     var imageWidth: NSNumber?
     var videoUrl: String?
+    var read = false
     
     
     init(dictionary: [String: Any]) {

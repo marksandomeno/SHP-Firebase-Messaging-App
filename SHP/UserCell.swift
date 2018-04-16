@@ -3,7 +3,7 @@
 //  SHP
 //
 //  Created by Mark Sandomeno on 6/18/17.
-//  Copyright © 2017 SandoStudios. All rights reserved.
+//  Copyright © 2017 Sando. All rights reserved.
 //
 
 //cell presented in messages controller
@@ -27,7 +27,9 @@ class UserCell: UITableViewCell {
                 let timestampDate = Date(timeIntervalSince1970: seconds)
                 
                 let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "hh:mm:ss a"
+                
+                dateFormatter.dateFormat = "hh:mm a"
+                
                 timeLabel.text = dateFormatter.string(from: timestampDate)
                 timeLabel.textColor = UIColor.init(r: 100, g: 100, b: 100)
                 
@@ -60,8 +62,10 @@ class UserCell: UITableViewCell {
         super.layoutSubviews()
         
         textLabel?.frame = CGRect(x: 64, y: textLabel!.frame.origin.y - 2, width: textLabel!.frame.width, height: textLabel!.frame.height)
+        
         textLabel?.textColor = UIColor.black
-        detailTextLabel?.frame = CGRect(x: 64, y: detailTextLabel!.frame.origin.y + 2, width: 300 , height: detailTextLabel!.frame.height)
+        detailTextLabel?.frame = CGRect(x: 64, y: detailTextLabel!.frame.origin.y + 2, width: 325 , height: detailTextLabel!.frame.height)
+     
         
         }
     

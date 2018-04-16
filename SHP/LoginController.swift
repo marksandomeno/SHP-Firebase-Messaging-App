@@ -3,7 +3,7 @@
 //  SHP
 //
 //  Created by Mark Sandomeno on 5/2/17.
-//  Copyright © 2017 SandoStudios. All rights reserved.
+//  Copyright © 2017 Sando. All rights reserved.
 //
 
 import UIKit
@@ -19,7 +19,7 @@ class LoginController: UIViewController {
     var nameTextFieldHeightAnchor: NSLayoutConstraint?
     var emailTextFieldHeightAnchor: NSLayoutConstraint?
     var passwordTextFieldHeightAnchor: NSLayoutConstraint?
-
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,10 +38,10 @@ class LoginController: UIViewController {
         view.addSubview(loginRegisterSegmentedControl)
         view.addSubview(forgotPassword)
         view.addSubview(StudentTeacherView)
-            StudentTeacherView.addSubview(teacherButton)
-            StudentTeacherView.addSubview(studentButton)
-            StudentTeacherView.addSubview(otherButton)
-       
+        StudentTeacherView.addSubview(teacherButton)
+        StudentTeacherView.addSubview(studentButton)
+        StudentTeacherView.addSubview(otherButton)
+        
         
         //Functions for the UI Components
         setupInputsContainerView()
@@ -58,15 +58,15 @@ class LoginController: UIViewController {
         //Causes the view (or one of its embedded text fields) to resign the first responder status.
         view.endEditing(true)
     }
-   
+    
     
     
     @objc func handleLoginRegister() {
         
         if loginRegisterSegmentedControl.selectedSegmentIndex == 0 {
             handleLogin()
-         
-           
+            
+            
             
         } else {
             handleRegister()
@@ -85,43 +85,45 @@ class LoginController: UIViewController {
             
             if error != nil {
                 print(error ?? "")
+
+                let animation = CABasicAnimation(keyPath: "position")
+                animation.duration = 0.07
+                animation.repeatCount = 4
+                animation.autoreverses = true
                 
-                
-                
-            let animation = CABasicAnimation(keyPath: "position")
-            animation.duration = 0.07
-            animation.repeatCount = 4
-            animation.autoreverses = true
-           
-            self.inputsContainerView.layer.add(animation, forKey: "position")
+                self.inputsContainerView.layer.add(animation, forKey: "position")
                 
                 let alertController = UIAlertController(title: "Wrong Email/Password", message:
                     "Notice Passwords Are Case Sensitive", preferredStyle: UIAlertControllerStyle.alert)
                 alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default,handler: nil))
-                
-                
+
                 self.present(alertController, animated: true, completion: nil)
-               
                 
                 return
             }
             
             //successfully logged in our user
-            let center = UNUserNotificationCenter.current()
-            let options: UNAuthorizationOptions = [.alert, .badge, .sound]
-            center.requestAuthorization(options: options, completionHandler: { (granted, error) in
-                if granted {
-                    UIApplication.shared.registerForRemoteNotifications()
-                }
-            })
-            self.messagesController?.fetchUserAndSetupNavBarTitle()
             
-            self.dismiss(animated: true, completion: nil)
-            
+            if let registrationToken = Messaging.messaging().fcmToken {
+                Database.database().reference().child("users").child(user!.uid).child("deviceToken").setValue(registrationToken)
+            }
+            else
+            {
+                let center = UNUserNotificationCenter.current()
+                let options: UNAuthorizationOptions = [.alert, .badge, .sound]
+                
+                center.requestAuthorization(options: options, completionHandler: { (granted, error) in
+                    if granted {
+                        
+                        DispatchQueue.main.async(execute: {
+                            UIApplication.shared.registerForRemoteNotifications()
+                            
+                        })
+                    }
+                })
+            }
         })
-        
     }
-    
     //handleRegister() can be found in file: LoginController+handlers
     
     
@@ -154,7 +156,7 @@ class LoginController: UIViewController {
         button.setTitle("Forgot Password?", for: UIControlState())
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitleColor(UIColor.init(r: 80, g: 101, b: 161), for: UIControlState())
-       
+        
         
         
         button.addTarget(self, action: #selector(handleForgotPasswordSwitch), for: .touchUpInside)
@@ -259,7 +261,7 @@ class LoginController: UIViewController {
         profileImageView.image = UIImage(named: "otherLogo")
         
     }
-
+    
     
     let nameTextField: UITextField = {
         let tf = UITextField()
@@ -307,7 +309,7 @@ class LoginController: UIViewController {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFill
         imageView.isUserInteractionEnabled = true
-       
+        
         
         return imageView
     }()
@@ -321,9 +323,9 @@ class LoginController: UIViewController {
         return sc
     }()
     
-
+    
     @objc func handleLoginRegisterChange() {
-
+        
         if loginRegisterSegmentedControl.selectedSegmentIndex == 1 {
             
             //profileImageView.isUserInteractionEnabled = true
@@ -343,27 +345,27 @@ class LoginController: UIViewController {
             //change the constrinats to support the newly added buttons when on register VV
             
             setupChoiceViewConstriants()
-
+            
         }else {
             
             //change text and states
             profileImageView.isUserInteractionEnabled = false
             passwordTextField.placeholder = "Password"
             profileImageView.image = UIImage(named: "Andrew")
-          
+            
             //hide buttons
             teacherButton.isHidden = true
             studentButton.isHidden = true
             otherButton.isHidden   = true
             StudentTeacherView.isHidden = true
-
+            
         }
         
-
+        
         let title = loginRegisterSegmentedControl.titleForSegment(at: loginRegisterSegmentedControl.selectedSegmentIndex)
         loginRegisterButton.setTitle(title, for: UIControlState())
         
-    
+        
         // change height of inputContainerView, but how???
         inputsContainerViewHeightAnchor?.constant = loginRegisterSegmentedControl.selectedSegmentIndex == 0 ? 100 : 150
         
@@ -404,34 +406,34 @@ class LoginController: UIViewController {
     }
     
     //main view that holds Student | Teacher | Other  choices
-   
     
-     func setupChoiceViewConstriants() {
-            
-            
-            StudentTeacherView.heightAnchor.constraint(equalToConstant: 40).isActive = true
-            StudentTeacherView.topAnchor.constraint(equalTo: inputsContainerView.bottomAnchor, constant: 12).isActive = true
-            StudentTeacherView.bottomAnchor.constraint(equalTo: loginRegisterButton.topAnchor, constant: -12).isActive = true
-            StudentTeacherView.leftAnchor.constraint(equalTo: inputsContainerView.leftAnchor).isActive = true
-            StudentTeacherView.rightAnchor.constraint(equalTo: inputsContainerView.rightAnchor).isActive = true
-            
-            teacherButton.topAnchor.constraint(equalTo:StudentTeacherView.topAnchor).isActive = true
-            teacherButton.bottomAnchor.constraint(equalTo: StudentTeacherView.bottomAnchor).isActive = true
-            teacherButton.leftAnchor.constraint(equalTo: StudentTeacherView.leftAnchor, constant: 2).isActive = true
-            teacherButton.widthAnchor.constraint(equalTo: StudentTeacherView.widthAnchor, multiplier: 1/3).isActive = true
-            
-            studentButton.topAnchor.constraint(equalTo:StudentTeacherView.topAnchor).isActive = true
-            studentButton.bottomAnchor.constraint(equalTo: StudentTeacherView.bottomAnchor).isActive = true
-            studentButton.leftAnchor.constraint(equalTo: teacherButton.rightAnchor, constant: 2).isActive = true
-            studentButton.widthAnchor.constraint(equalTo: StudentTeacherView.widthAnchor, multiplier: 1/3).isActive = true
-            
-            otherButton.topAnchor.constraint(equalTo:StudentTeacherView.topAnchor).isActive = true
-            otherButton.bottomAnchor.constraint(equalTo: StudentTeacherView.bottomAnchor).isActive = true
-            otherButton.leftAnchor.constraint(equalTo: studentButton.rightAnchor, constant: 2).isActive = true
-            otherButton.widthAnchor.constraint(equalTo: StudentTeacherView.widthAnchor, multiplier: 1/3).isActive = true
- 
+    
+    func setupChoiceViewConstriants() {
+        
+        
+        StudentTeacherView.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        StudentTeacherView.topAnchor.constraint(equalTo: inputsContainerView.bottomAnchor, constant: 12).isActive = true
+        StudentTeacherView.bottomAnchor.constraint(equalTo: loginRegisterButton.topAnchor, constant: -12).isActive = true
+        StudentTeacherView.leftAnchor.constraint(equalTo: inputsContainerView.leftAnchor).isActive = true
+        StudentTeacherView.rightAnchor.constraint(equalTo: inputsContainerView.rightAnchor).isActive = true
+        
+        teacherButton.topAnchor.constraint(equalTo:StudentTeacherView.topAnchor).isActive = true
+        teacherButton.bottomAnchor.constraint(equalTo: StudentTeacherView.bottomAnchor).isActive = true
+        teacherButton.leftAnchor.constraint(equalTo: StudentTeacherView.leftAnchor, constant: 2).isActive = true
+        teacherButton.widthAnchor.constraint(equalTo: StudentTeacherView.widthAnchor, multiplier: 1/3).isActive = true
+        
+        studentButton.topAnchor.constraint(equalTo:StudentTeacherView.topAnchor).isActive = true
+        studentButton.bottomAnchor.constraint(equalTo: StudentTeacherView.bottomAnchor).isActive = true
+        studentButton.leftAnchor.constraint(equalTo: teacherButton.rightAnchor, constant: 2).isActive = true
+        studentButton.widthAnchor.constraint(equalTo: StudentTeacherView.widthAnchor, multiplier: 1/3).isActive = true
+        
+        otherButton.topAnchor.constraint(equalTo:StudentTeacherView.topAnchor).isActive = true
+        otherButton.bottomAnchor.constraint(equalTo: StudentTeacherView.bottomAnchor).isActive = true
+        otherButton.leftAnchor.constraint(equalTo: studentButton.rightAnchor, constant: 2).isActive = true
+        otherButton.widthAnchor.constraint(equalTo: StudentTeacherView.widthAnchor, multiplier: 1/3).isActive = true
+        
     }
-   
+    
     
     func setupForgotPassword() {
         
@@ -508,7 +510,6 @@ class LoginController: UIViewController {
     }
     
 }//class ends
-
 extension UIColor {
     
     convenience init(r: CGFloat, g: CGFloat, b: CGFloat) {

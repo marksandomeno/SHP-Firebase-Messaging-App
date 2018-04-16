@@ -3,9 +3,9 @@
 //  SHP
 //
 //  Created by Mark Sandomeno on 7/6/17.
-//  Copyright © 2017 SandoStudios. All rights reserved.
+//  Copyright © 2017 Sando. All rights reserved.
 //
-//bottom input container at bottom
+
 
 import UIKit
 
@@ -49,8 +49,8 @@ class ChatInputContainerView: UIView, UITextFieldDelegate {
         //x,y,w,h
         uploadImageView.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
         uploadImageView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-        uploadImageView.widthAnchor.constraint(equalToConstant: 44).isActive = true
-        uploadImageView.heightAnchor.constraint(equalToConstant: 44).isActive = true
+        uploadImageView.widthAnchor.constraint(equalToConstant: 48).isActive = true
+        uploadImageView.heightAnchor.constraint(equalToConstant: 48).isActive = true
         
         
        
@@ -59,12 +59,15 @@ class ChatInputContainerView: UIView, UITextFieldDelegate {
         
         addSubview(sendButton)
         //x,y,w,h
-        sendButton.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
+        sendButton.rightAnchor.constraint(equalTo: rightAnchor, constant: -6).isActive = true
         sendButton.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-        sendButton.widthAnchor.constraint(equalToConstant: 80).isActive = true
-        sendButton.heightAnchor.constraint(equalTo: heightAnchor).isActive = true
+        sendButton.widthAnchor.constraint(equalToConstant: 85).isActive = true
+        sendButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        sendButton.layer.cornerRadius = 15
+        sendButton.backgroundColor = UIColor.init(r: 1, g: 136, b: 247)
         
         sendButton.setTitle("Send", for: UIControlState())
+        sendButton.setTitleColor(.white, for: UIControlState())
         sendButton.translatesAutoresizingMaskIntoConstraints = false
         
         
@@ -74,7 +77,7 @@ class ChatInputContainerView: UIView, UITextFieldDelegate {
         self.inputTextField.leftAnchor.constraint(equalTo: uploadImageView.rightAnchor, constant: 8).isActive = true
         self.inputTextField.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         self.inputTextField.rightAnchor.constraint(equalTo: sendButton.leftAnchor).isActive = true
-        self.inputTextField.heightAnchor.constraint(equalToConstant: 46.5).isActive = true
+        self.inputTextField.heightAnchor.constraint(equalToConstant: 50).isActive = true
         
         let separatorLineView = UIView()
         separatorLineView.backgroundColor = UIColor(r: 220, g: 220, b: 220)

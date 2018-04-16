@@ -3,7 +3,7 @@
 //  SHP
 //
 //  Created by Mark Sandomeno on 5/2/17.
-//  Copyright © 2017 SandoStudios. All rights reserved.
+//  Copyright © 2017 Sando. All rights reserved.
 //
 
 import UIKit
@@ -26,7 +26,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
         
         window?.rootViewController = UINavigationController(rootViewController: MessagesController())
         
-
         Messaging.messaging().delegate = self
       
     
@@ -62,6 +61,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
     }
     
     func messaging(_ messaging: Messaging, didRefreshRegistrationToken fcmToken: String) {
+        
         guard let userId = Auth.auth().currentUser?.uid else {
             return
         }
@@ -75,7 +75,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
     
 }
 
-/*extension AppDelegate: UNUserNotificationCenterDelegate {
+extension AppDelegate: UNUserNotificationCenterDelegate {
     
     public func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         
@@ -85,4 +85,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
     public func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Swift.Void) {
         completionHandler()
     }
-}*/
+}
